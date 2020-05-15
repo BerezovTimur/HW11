@@ -2,14 +2,24 @@ package ru.netology.manager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import ru.netology.domain.AfishaItem;
+import ru.netology.repository.AfishaRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 class AfishaManagerTest {
+    @Mock
+    AfishaRepository repository;
+    @InjectMocks
 
-    AfishaManager manager;
-    AfishaManager managerCustom;
+    AfishaManager manager = new AfishaManager(repository);
+    AfishaManager managerCustom = new AfishaManager(repository, 5);
 
     private AfishaItem first = new AfishaItem(1, "Бладшот", "боевик");
     private AfishaItem second = new AfishaItem(2, "Вперед", "мультфильм");
@@ -25,66 +35,68 @@ class AfishaManagerTest {
 
     @BeforeEach
     void setUp() {
-        manager = new AfishaManager();
-        manager.AddFilm(first);
-        manager.AddFilm(second);
-        manager.AddFilm(third);
-        manager.AddFilm(fourth);
-        manager.AddFilm(fifth);
-        manager.AddFilm(sixth);
-        manager.AddFilm(seventh);
-        manager.AddFilm(eighth);
-        manager.AddFilm(ninth);
-
-        managerCustom = new AfishaManager(5);
-        managerCustom.AddFilm(first);
-        managerCustom.AddFilm(second);
-        managerCustom.AddFilm(third);
-        managerCustom.AddFilm(fourth);
-        managerCustom.AddFilm(fifth);
+        manager = new AfishaManager(repository);
+        managerCustom = new AfishaManager(repository, 5);
     }
 
     @Test
     void shouldGetLastTen() {
-        manager.AddFilm(tenth);
-        AfishaItem[] actual = manager.getAll();
+        AfishaItem[] returned = new AfishaItem[]{first, second, third, fourth, fifth, sixth, seventh, eighth, ninth, tenth};
+        doReturn(returned).when(repository).findAll();
+
         AfishaItem[] expected = new AfishaItem[]{tenth, ninth, eighth, seventh, sixth, fifth, fourth, third, second, first};
-        assertArrayEquals(actual, expected);
+        AfishaItem[] actual = manager.getAll();
+        assertArrayEquals(expected, actual);
+
+        verify(repository, times(1)).findAll();
     }
 
     @Test
     void shouldGetLastTenIfEleven() {
-        manager.AddFilm(tenth);
-        manager.AddFilm(eleventh);
-        AfishaItem[] actual = manager.getAll();
+        AfishaItem[] returned = new AfishaItem[]{first, second, third, fourth, fifth, sixth, seventh, eighth, ninth, tenth, eleventh};
+        doReturn(returned).when(repository).findAll();
+
         AfishaItem[] expected = new AfishaItem[]{eleventh, tenth, ninth, eighth, seventh, sixth, fifth, fourth, third, second};
-        assertArrayEquals(actual, expected);
+        AfishaItem[] actual = manager.getAll();
+        assertArrayEquals(expected, actual);
+
+        verify(repository, times(1)).findAll();
     }
 
     @Test
     void shouldGetAllFromTen() {
-        AfishaItem[] actual = manager.getAll();
+        AfishaItem[] returned = new AfishaItem[]{first, second, third, fourth, fifth, sixth, seventh, eighth, ninth};
+        doReturn(returned).when(repository).findAll();
+
         AfishaItem[] expected = new AfishaItem[]{ninth, eighth, seventh, sixth, fifth, fourth, third, second, first};
-        assertArrayEquals(actual, expected);
+        AfishaItem[] actual = manager.getAll();
+        assertArrayEquals(expected, actual);
+
+        verify(repository, times(1)).findAll();
     }
 
     @Test
     void shouldGetLastFive() {
-        AfishaItem[] actual = managerCustom.getAll();
+        AfishaItem[] returned = new AfishaItem[]{first, second, third, fourth, fifth};
+        doReturn(returned).when(repository).findAll();
+
         AfishaItem[] expected = new AfishaItem[]{fifth, fourth, third, second, first};
-        assertArrayEquals(actual, expected);
+        AfishaItem[] actual = managerCustom.getAll();
+        assertArrayEquals(expected, actual);
+
+        verify(repository, times(1)).findAll();
     }
 
     @Test
     void shouldGetLastFiveIfTen() {
-        managerCustom.AddFilm(sixth);
-        managerCustom.AddFilm(seventh);
-        managerCustom.AddFilm(eighth);
-        managerCustom.AddFilm(ninth);
-        managerCustom.AddFilm(tenth);
+        AfishaItem[] returned = new AfishaItem[]{first, second, third, fourth, fifth, sixth, seventh, eighth, ninth, tenth};
+        doReturn(returned).when(repository).findAll();
+
         AfishaItem[] expected = new AfishaItem[]{tenth, ninth, eighth, seventh, sixth};
         AfishaItem[] actual = managerCustom.getAll();
         assertArrayEquals(expected, actual);
+
+        verify(repository, times(1)).findAll();
     }
 
 }
