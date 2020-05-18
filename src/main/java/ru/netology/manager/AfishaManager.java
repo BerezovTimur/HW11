@@ -19,20 +19,16 @@ public class AfishaManager {
         this.customAfishaLength = customAfishaLength;
     }
 
-    public void AddFilm(AfishaItem item) {
-        repository.save(item);
-    }
-
     public AfishaItem[] getAll() {
         AfishaItem[] items = repository.findAll();
         int length = items.length;
 
         if (customAfishaLength <= 0) {
-            if (defaultAfishaLength < items.length) {
+            if (defaultAfishaLength < length) {
                 length = defaultAfishaLength;
             }
         } else {
-            if (customAfishaLength < items.length) {
+            if (customAfishaLength < length) {
                 length = customAfishaLength;
             }
         }
