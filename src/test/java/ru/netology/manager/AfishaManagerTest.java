@@ -87,4 +87,38 @@ class AfishaManagerTest {
         assertArrayEquals(expected, actual);
     }
 
+    @Test
+    void shouldGetFiveDefaultZero() {
+        manager = new AfishaManager(0);
+        AfishaItem[] expected = new AfishaItem[]{fifth, fourth, third, second, first};
+        AfishaItem[] actual = managerCustom.getAll();
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void shouldGetFiveAsDefaultOverZero() {
+        manager = new AfishaManager(-10);
+        AfishaItem[] expected = new AfishaItem[]{fifth, fourth, third, second, first};
+        AfishaItem[] actual = managerCustom.getAll();
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void shouldGetFiveDefaultUnderMax() {
+        manager = new AfishaManager(100);
+        AfishaItem[] expected = new AfishaItem[]{fifth, fourth, third, second, first};
+        AfishaItem[] actual = managerCustom.getAll();
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void shouldRemoveById(){
+        manager.AddFilm(tenth);
+        int idToRemove = 1;
+
+        manager.removeById(idToRemove);
+        AfishaItem[] expected = new AfishaItem[]{tenth, ninth, eighth, seventh, sixth, fifth, fourth, third, second};
+        AfishaItem[] actual = new AfishaItem[]{tenth, ninth, eighth, seventh, sixth, fifth, fourth, third, second};
+        assertArrayEquals(expected, actual);
+    }
 }

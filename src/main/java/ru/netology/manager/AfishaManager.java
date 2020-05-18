@@ -31,11 +31,11 @@ public class AfishaManager {
         int length = items.length;
 
         if (customAfishaLength <= 0) {
-            if (defaultAfishaLength < items.length) {
+            if (defaultAfishaLength < length) {
                 length = defaultAfishaLength;
             }
         } else {
-            if (customAfishaLength < items.length) {
+            if (customAfishaLength < length) {
                 length = customAfishaLength;
             }
         }
@@ -46,5 +46,18 @@ public class AfishaManager {
             result[i] = items[index];
         }
         return result;
+    }
+
+    public void removeById(int id) {
+        int length = items.length - 1;
+        AfishaItem[] tmp = new AfishaItem[length];
+        int index = 0;
+        for (AfishaItem item : items) {
+            if (item.getId() != id) {
+                tmp[index] = item;
+                index++;
+            }
+        }
+        items = tmp;
     }
 }
