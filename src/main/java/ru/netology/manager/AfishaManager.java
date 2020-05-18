@@ -31,11 +31,11 @@ public class AfishaManager {
         int length = items.length;
 
         if (customAfishaLength <= 0) {
-            if (defaultAfishaLength < length/*items.length*/) {
+            if (defaultAfishaLength < length) {
                 length = defaultAfishaLength;
             }
         } else {
-            if (customAfishaLength < length/*items.length*/) {
+            if (customAfishaLength < length) {
                 length = customAfishaLength;
             }
         }
