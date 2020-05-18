@@ -47,4 +47,17 @@ public class AfishaManager {
         }
         return result;
     }
+
+    public void removeById(int id) {
+        int length = items.length - 1;
+        AfishaItem[] tmp = new AfishaItem[length];
+        int index = 0;
+        for (AfishaItem item : items) {
+            if (item.getId() != id) {
+                tmp[index] = item;
+                index++;
+            }
+        }
+        items = tmp;
+    }
 }

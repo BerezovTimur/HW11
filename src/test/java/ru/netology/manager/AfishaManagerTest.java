@@ -110,4 +110,15 @@ class AfishaManagerTest {
         AfishaItem[] actual = managerCustom.getAll();
         assertArrayEquals(expected, actual);
     }
+
+    @Test
+    void shouldRemoveById(){
+        manager.AddFilm(tenth);
+        int idToRemove = 1;
+
+        manager.removeById(idToRemove);
+        AfishaItem[] expected = new AfishaItem[]{tenth, ninth, eighth, seventh, sixth, fifth, fourth, third, second};
+        AfishaItem[] actual = new AfishaItem[]{tenth, ninth, eighth, seventh, sixth, fifth, fourth, third, second};
+        assertArrayEquals(expected, actual);
+    }
 }
