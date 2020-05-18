@@ -99,4 +99,42 @@ class AfishaManagerTest {
         verify(repository, times(1)).findAll();
     }
 
+    @Test
+    void shouldGetFiveDefaultZero() {
+        manager = new AfishaManager(repository,0);
+        AfishaItem[] returned = new AfishaItem[]{first, second, third, fourth, fifth};
+        doReturn(returned).when(repository).findAll();
+
+        AfishaItem[] expected = new AfishaItem[]{fifth, fourth, third, second, first};
+        AfishaItem[] actual = managerCustom.getAll();
+        assertArrayEquals(expected, actual);
+
+        verify(repository, times(1)).findAll();
+    }
+
+    @Test
+    void shouldGetFiveAsDefaultOverZero() {
+        manager = new AfishaManager(repository,-10);
+        AfishaItem[] returned = new AfishaItem[]{first, second, third, fourth, fifth};
+        doReturn(returned).when(repository).findAll();
+
+        AfishaItem[] expected = new AfishaItem[]{fifth, fourth, third, second, first};
+        AfishaItem[] actual = managerCustom.getAll();
+        assertArrayEquals(expected, actual);
+
+        verify(repository, times(1)).findAll();
+    }
+
+    @Test
+    void shouldGetFiveDefaultUnderMax() {
+        manager = new AfishaManager(repository,100);
+        AfishaItem[] returned = new AfishaItem[]{first, second, third, fourth, fifth};
+        doReturn(returned).when(repository).findAll();
+
+        AfishaItem[] expected = new AfishaItem[]{fifth, fourth, third, second, first};
+        AfishaItem[] actual = managerCustom.getAll();
+        assertArrayEquals(expected, actual);
+
+        verify(repository, times(1)).findAll();
+    }
 }

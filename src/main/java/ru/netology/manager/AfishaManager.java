@@ -41,3 +41,4 @@ public class AfishaManager {
         return result;
     }
 }
+
