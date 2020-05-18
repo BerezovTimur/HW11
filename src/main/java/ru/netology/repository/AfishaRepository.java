@@ -10,13 +10,16 @@ public class AfishaRepository {
         return items;
     }
 
-    public AfishaItem findById(int id) {
+    public void findById(int id){
+        AfishaItem[] tmp = new AfishaItem[1];
+        int index = 0;
         for (AfishaItem item : items) {
-            if (item.getId() == id) {
-                return item;
+            if (item.getId() == id){
+                tmp[index] = item;
+                index++;
             }
         }
-        return null;
+        items = tmp;
     }
 
     public void removeById(int id) {

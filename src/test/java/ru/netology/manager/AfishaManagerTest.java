@@ -16,6 +16,7 @@ import static org.mockito.Mockito.*;
 class AfishaManagerTest {
     @Mock
     AfishaRepository repository;
+
     @InjectMocks
 
     AfishaManager manager = new AfishaManager(repository);

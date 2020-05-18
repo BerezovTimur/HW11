@@ -19,6 +19,10 @@ public class AfishaManager {
         this.customAfishaLength = customAfishaLength;
     }
 
+    public void add(AfishaItem item) {
+        repository.save(item);
+    }
+
     public AfishaItem[] getAll() {
         AfishaItem[] items = repository.findAll();
         int length = items.length;
@@ -39,6 +43,14 @@ public class AfishaManager {
             result[i] = items[index];
         }
         return result;
+    }
+
+    public void removeById(int id) {
+        repository.removeById(id);
+    }
+
+    public void removeAll(){
+        repository.removeAll();
     }
 }
 
