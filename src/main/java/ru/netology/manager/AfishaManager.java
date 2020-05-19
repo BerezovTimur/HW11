@@ -44,9 +44,5 @@ public class AfishaManager {
         }
         return result;
     }
-
-    public void removeAll(){
-        repository.removeAll();
-    }
 }
 
