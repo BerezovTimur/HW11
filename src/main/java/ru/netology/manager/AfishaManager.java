@@ -15,7 +15,7 @@ public class AfishaManager {
         this.customAfishaLength = customAfishaLength;
     }
 
-    public void AddFilm(AfishaItem item) {
+    public void addFilm(AfishaItem item) {
 
         int length = items.length + 1;
         AfishaItem[] tmp = new AfishaItem[length];

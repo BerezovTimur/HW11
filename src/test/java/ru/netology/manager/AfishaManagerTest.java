@@ -26,27 +26,27 @@ class AfishaManagerTest {
     @BeforeEach
     void setUp() {
         manager = new AfishaManager();
-        manager.AddFilm(first);
-        manager.AddFilm(second);
-        manager.AddFilm(third);
-        manager.AddFilm(fourth);
-        manager.AddFilm(fifth);
-        manager.AddFilm(sixth);
-        manager.AddFilm(seventh);
-        manager.AddFilm(eighth);
-        manager.AddFilm(ninth);
+        manager.addFilm(first);
+        manager.addFilm(second);
+        manager.addFilm(third);
+        manager.addFilm(fourth);
+        manager.addFilm(fifth);
+        manager.addFilm(sixth);
+        manager.addFilm(seventh);
+        manager.addFilm(eighth);
+        manager.addFilm(ninth);
 
         managerCustom = new AfishaManager(5);
-        managerCustom.AddFilm(first);
-        managerCustom.AddFilm(second);
-        managerCustom.AddFilm(third);
-        managerCustom.AddFilm(fourth);
-        managerCustom.AddFilm(fifth);
+        managerCustom.addFilm(first);
+        managerCustom.addFilm(second);
+        managerCustom.addFilm(third);
+        managerCustom.addFilm(fourth);
+        managerCustom.addFilm(fifth);
     }
 
     @Test
     void shouldGetLastTen() {
-        manager.AddFilm(tenth);
+        manager.addFilm(tenth);
         AfishaItem[] actual = manager.getAll();
         AfishaItem[] expected = new AfishaItem[]{tenth, ninth, eighth, seventh, sixth, fifth, fourth, third, second, first};
         assertArrayEquals(actual, expected);
@@ -54,8 +54,8 @@ class AfishaManagerTest {
 
     @Test
     void shouldGetLastTenIfEleven() {
-        manager.AddFilm(tenth);
-        manager.AddFilm(eleventh);
+        manager.addFilm(tenth);
+        manager.addFilm(eleventh);
         AfishaItem[] actual = manager.getAll();
         AfishaItem[] expected = new AfishaItem[]{eleventh, tenth, ninth, eighth, seventh, sixth, fifth, fourth, third, second};
         assertArrayEquals(actual, expected);
@@ -77,11 +77,11 @@ class AfishaManagerTest {
 
     @Test
     void shouldGetLastFiveIfTen() {
-        managerCustom.AddFilm(sixth);
-        managerCustom.AddFilm(seventh);
-        managerCustom.AddFilm(eighth);
-        managerCustom.AddFilm(ninth);
-        managerCustom.AddFilm(tenth);
+        managerCustom.addFilm(sixth);
+        managerCustom.addFilm(seventh);
+        managerCustom.addFilm(eighth);
+        managerCustom.addFilm(ninth);
+        managerCustom.addFilm(tenth);
         AfishaItem[] expected = new AfishaItem[]{tenth, ninth, eighth, seventh, sixth};
         AfishaItem[] actual = managerCustom.getAll();
         assertArrayEquals(expected, actual);
@@ -113,7 +113,7 @@ class AfishaManagerTest {
 
     @Test
     void shouldRemoveById(){
-        manager.AddFilm(tenth);
+        manager.addFilm(tenth);
         int idToRemove = 1;
 
         manager.removeById(idToRemove);
